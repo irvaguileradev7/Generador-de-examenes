@@ -69,4 +69,4 @@ Este proyecto es **Open Source** y está liberado bajo la **Licencia MIT**.
 
 Eres libre de usar, modificar y distribuir el código, siempre y cuando se incluya la nota de copyright y el texto de la licencia. Para más detalles, consulta el archivo [LICENSE](LICENSE).
 
-&copy; 2025 [Tu Nombre Completo]
+&copy; 2025 Kevin Irving Aguilera Pérez
