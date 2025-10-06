@@ -1,4 +1,4 @@
-# Generador de Exámenes desde Excel (Prueba Técnica)
+# Generador de Exámenes desde Excel
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -45,3 +45,28 @@ Este proyecto está diseñado para funcionar de forma completamente local y no r
 ## 🗂️ Estructura del Proyecto
 
 La aplicación sigue una arquitectura modular para mejorar la organización del código:
+/generador-examenes/
+├── index.html               # Punto de entrada principal
+├── LICENSE                  # Archivo de licencia (MIT)
+├── README.md                # Este archivo
+└── /src/
+├── /core/               # Lógica central del negocio
+│   ├── excelProcessor.js  # Lógica de carga y parseo de Excel
+│   ├── themeManager.js    # Manejo de modo Claro/Oscuro y persistencia
+│   └── utils.js           # Funciones auxiliares (ej. shuffleArray)
+├── /ui/                 # Componentes de la interfaz
+│   ├── QuizRenderer.js    # Lógica de renderizado y corrección del examen
+│   └── TopBar.js          # Manejo de eventos de la barra superior
+├── /styles/
+│   └── styles.css       # Estilos personalizados y reglas de Dark Mode
+└── main.js              # Coordinador (inicializa módulos y listeners)
+
+---
+
+## 📄 Licencia
+
+Este proyecto es **Open Source** y está liberado bajo la **Licencia MIT**.
+
+Eres libre de usar, modificar y distribuir el código, siempre y cuando se incluya la nota de copyright y el texto de la licencia. Para más detalles, consulta el archivo [LICENSE](LICENSE).
+
+&copy; 2025 [Tu Nombre Completo]
