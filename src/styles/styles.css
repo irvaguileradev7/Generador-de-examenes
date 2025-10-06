@@ -1,0 +1,129 @@
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark body {
+  background-color: #1a202c;
+}
+.dark #app {
+  background-color: #2d3748;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5),
+    0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+.dark #topBar {
+  background-color: #2d3748;
+  border-bottom-color: #4a5568;
+}
+.dark h1,
+.dark h2,
+.dark h3,
+.dark p,
+.dark label,
+.dark span {
+  color: #e2e8f0;
+}
+.dark .text-gray-800 {
+  color: #e2e8f0;
+}
+.dark .text-gray-700 {
+  color: #cbd5e0;
+}
+.dark .text-gray-500 {
+  color: #a0aec0;
+}
+.dark .border-b {
+  border-color: #4a5568;
+}
+.dark .bg-white {
+  background-color: #2d3748;
+}
+.dark .bg-gray-50 {
+  background-color: #4a5568;
+}
+.dark .border-gray-200,
+.dark .border-gray-300 {
+  border-color: #4a5568;
+}
+.dark .bg-yellow-50 {
+  background-color: #4a5568;
+}
+.dark .text-yellow-800 {
+  color: #f6ad55;
+}
+.dark .text-yellow-700 {
+  color: #f6e05e;
+}
+.dark .border-yellow-500 {
+  border-color: #f6ad55;
+}
+.dark .bg-blue-100 {
+  background-color: #4299e1;
+}
+.dark .border-blue-600 {
+  border-color: #63b3ed;
+}
+.dark .text-blue-800 {
+  color: #e2e8f0;
+}
+.dark .text-blue-700 {
+  color: #bee3f8;
+}
+
+.dark .bg-gray-50 {
+  background-color: #4a5568;
+}
+.dark .hover\:bg-blue-50:hover {
+  background-color: #4299e1;
+}
+.dark .bg-green-100 {
+  background-color: #48bb78;
+}
+.dark .bg-red-100 {
+  background-color: #f56565;
+}
+.dark .border-red-500 {
+  border-color: #e53e3e;
+}
+.dark .border-green-500 {
+  border-color: #38a169;
+}
+
+#themeSelector option {
+  color: #000;
+  background-color: #fff;
+}
+.dark #themeSelector option {
+  color: #fff;
+  background-color: #2d3748;
+}
+
+.light .question-box {
+  background-color: #ffffff;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+.light .question-title {
+  color: #1f2937;
+}
+.light .option-label {
+  background-color: #f9fafb;
+  border-color: #f3f4f6;
+}
+.light .option-label:hover {
+  background-color: #eff6ff;
+}
+.light .option-text {
+  color: #374151;
+}
+.light .bg-green-100 {
+  background-color: #d1fae5;
+}
+.light .border-green-500 {
+  border-color: #10b981;
+}
+.light .bg-red-100 {
+  background-color: #fee2e2;
+}
+.light .border-red-500 {
+  border-color: #ef4444;
+}
