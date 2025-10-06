@@ -35,7 +35,7 @@ Este proyecto está diseñado para funcionar de forma completamente local y no r
 1.  **Clonar el Repositorio:**
     ```bash
     git clone https://github.com/irvaguileradev7/Generador-de-examenes.git
-    cd generador-examenes
+    cd generador-de-examenes
     ```
 2.  **Ejecutar:** Simplemente abre el archivo **`index.html`** en cualquier navegador moderno.
 3.  **Cargar Examen:** Utiliza el botón **"Descargar plantilla de Excel"** para conocer el formato requerido (Columna A: Pregunta, Columna B: Respuesta Correcta, C en adelante: Distractores). Luego, sube tu archivo con el botón **"Seleccionar Archivo Excel"**.
@@ -46,20 +46,20 @@ Este proyecto está diseñado para funcionar de forma completamente local y no r
 
 La aplicación sigue una arquitectura modular para mejorar la organización del código:
 /generador-examenes/
-├── index.html               # Punto de entrada principal
-├── LICENSE                  # Archivo de licencia (MIT)
-├── README.md                # Este archivo
-└── /src/
-├── /core/               # Lógica central del negocio
-│   ├── excelProcessor.js  # Lógica de carga y parseo de Excel
-│   ├── themeManager.js    # Manejo de modo Claro/Oscuro y persistencia
-│   └── utils.js           # Funciones auxiliares (ej. shuffleArray)
-├── /ui/                 # Componentes de la interfaz
-│   ├── QuizRenderer.js    # Lógica de renderizado y corrección del examen
-│   └── TopBar.js          # Manejo de eventos de la barra superior
-├── /styles/
-│   └── styles.css       # Estilos personalizados y reglas de Dark Mode
-└── main.js              # Coordinador (inicializa módulos y listeners)
+├── index.html             # Punto de entrada principal (la aplicación web)
+├── LICENSE                # Archivo de licencia (actualmente MIT)
+├── README.md              # Documentación principal del proyecto (este archivo)
+└── src/                   # Contiene todo el código fuente de la aplicación
+    ├── core/              # Lógica central del negocio (independiente de la UI)
+    │   ├── excelProcessor.js  # Carga y parseo de datos desde archivos Excel.
+    │   ├── themeManager.js    # Manejo del modo Claro/Oscuro y persistencia de la preferencia.
+    │   └── utils.js           # Colección de funciones auxiliares (ej. shuffleArray).
+    ├── ui/                    # Componentes y lógica de la Interfaz de Usuario (UI)
+    │   ├── QuizRenderer.js    # Lógica de renderizado del examen, manejo de respuestas y corrección.
+    │   └── TopBar.js          # Manejo de la barra de navegación superior (eventos, interacciones).
+    ├── styles/                # Hojas de estilo
+    │   └── styles.css         # Estilos personalizados de la aplicación y reglas de Dark Mode.
+    └── main.js                # Coordinador principal: Inicializa los módulos de /core/, /ui/ y configura los listeners.
 
 ---
 
