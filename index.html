@@ -13,7 +13,22 @@
       id="topBar"
       class="fixed top-0 left-0 right-0 z-10 bg-white shadow-lg border-b border-gray-200 px-4 md:px-8 py-3 flex flex-wrap items-center justify-between transition duration-300"
     >
-      <h2 class="text-xl font-bold text-blue-600 mb-2 md:mb-0">Examen</h2>
+      <div class="flex flex-wrap items-center gap-4">
+        <h2 class="text-xl font-bold text-blue-600 mb-2 md:mb-0">Gestor de Exámenes</h2>
+        <button
+          id="uploadExamButton"
+          class="px-3 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-300 ease-in-out text-sm"
+        >
+          Cargar Excel 📤
+        </button>
+        <button
+          id="newExamButton"
+          class="px-3 py-2 bg-purple-500 text-white font-semibold rounded-lg shadow-md hover:bg-purple-600 transition duration-300 ease-in-out text-sm"
+        >
+          Crear Nuevo Examen ➕
+        </button>
+      </div>
+
       <div class="flex flex-wrap gap-2 md:gap-4 items-center">
         <label for="themeSelector" class="text-sm font-medium text-gray-700"
           >Modo:</label
@@ -52,38 +67,83 @@
           Generador de Exámenes <span class="text-blue-600">Excel</span>
         </h1>
         <p class="text-gray-500 mb-6 border-b pb-4">
-          Convierte tu hoja de cálculo en un examen interactivo.
+          Crea tu examen desde cero o a partir de una hoja de cálculo.
         </p>
 
-        <div class="mb-8 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
-          <h2 class="text-xl font-semibold text-yellow-800 mb-2">
-            Formato de Excel Requerido:
-          </h2>
-          <ul class="text-sm text-yellow-700 list-disc list-inside space-y-1">
-            <li><strong class="font-bold">Columna A:</strong> Pregunta (Texto)</li>
-            <li><strong class="font-bold">Columna B:</strong> Respuesta Correcta (Texto)</li>
-            <li><strong class="font-bold">Columna C, D, E, etc.:</strong> Opciones de Respuesta Adicionales (Distractores)</li>
-          </ul>
+        <div id="examCreatorContainer" class="hidden">
+          <h2 class="text-2xl font-bold text-gray-700 mb-6">Añadir Preguntas</h2>
+          
+          <div class="p-4 border border-gray-300 rounded-lg bg-gray-50 mb-6">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Añadir/Editar Pregunta</h3>
+            <div class="space-y-4">
+                <div>
+                    <label for="questionText" class="block text-sm font-medium text-gray-700">Pregunta</label>
+                    <input type="text" id="questionText" placeholder="Escribe la pregunta..." class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="correctAnswerText" class="block text-sm font-medium text-gray-700">Respuesta Correcta</label>
+                    <input type="text" id="correctAnswerText" placeholder="Respuesta correcta" class="mt-1 block w-full p-2 border border-green-500 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">
+                </div>
+                <div id="distractorsContainer" class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Distractores (Opciones Incorrectas)</label>
+                    </div>
+                <button id="addDistractorButton" type="button" class="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-100 transition duration-150 ease-in-out">
+                    ➕ Añadir Distractor
+                </button>
+            </div>
+            <button
+                id="saveQuestionButton"
+                class="mt-4 w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out"
+            >
+                Guardar Pregunta
+            </button>
+          </div>
+
+          <div id="questionsList" class="space-y-4 mb-8">
+            <h3 class="text-xl font-semibold text-gray-700 mb-4">Preguntas Añadidas:</h3>
+            <p id="noQuestionsMessage" class="text-gray-500">No hay preguntas añadidas.</p>
+          </div>
+
           <button
-            id="downloadTemplateButton"
-            class="w-full mt-2 md:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105"
+            id="exportExamButton"
+            class="w-full md:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50"
+            disabled
           >
-            Descargar plantilla de Excel
+            Exportar a Excel 💾
           </button>
         </div>
 
-        <div
-          class="flex flex-col md:flex-row gap-4 items-center mb-8 p-4 border rounded-lg bg-gray-50"
-        >
-          <label for="excelFile" class="text-gray-700 font-medium"
-            >Seleccionar Archivo Excel (.xlsx):</label
-          >
-          <input
-            type="file"
-            id="excelFile"
-            accept=".xlsx"
-            class="flex-grow w-full md:w-auto p-2 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-          />
+        <div id="excelUploaderContainer">
+            <div class="mb-8 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
+                <h2 class="text-xl font-semibold text-yellow-800 mb-2">
+                  Formato de Excel Requerido:
+                </h2>
+                <ul class="text-sm text-yellow-700 list-disc list-inside space-y-1">
+                  <li><strong class="font-bold">Columna A:</strong> Pregunta (Texto)</li>
+                  <li><strong class="font-bold">Columna B:</strong> Respuesta Correcta (Texto)</li>
+                  <li><strong class="font-bold">Columna C, D, E, etc.:</strong> Opciones de Respuesta Adicionales (Distractores)</li>
+                </ul>
+                <button
+                  id="downloadTemplateButton"
+                  class="w-full mt-2 md:w-auto px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105"
+                >
+                  Descargar plantilla de Excel
+                </button>
+            </div>
+            
+            <div
+                class="flex flex-col md:flex-row gap-4 items-center mb-8 p-4 border rounded-lg bg-gray-50"
+            >
+                <label for="excelFile" class="text-gray-700 font-medium"
+                    >Seleccionar Archivo Excel (.xlsx):</label
+                >
+                <input
+                    type="file"
+                    id="excelFile"
+                    accept=".xlsx"
+                    class="flex-grow w-full md:w-auto p-2 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                />
+            </div>
         </div>
 
         <div id="quizContainer" class="hidden mt-8">
@@ -115,5 +175,6 @@
       </div>
     </div>
     <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/ui/QuestionManager.js"></script> 
   </body>
 </html>

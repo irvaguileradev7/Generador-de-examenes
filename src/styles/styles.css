@@ -127,3 +127,42 @@ body {
 .light .border-red-500 {
   border-color: #ef4444;
 }
+.dark #examCreatorContainer .p-4.border.rounded-lg.bg-gray-50 {
+  background-color: #2d3748;
+  border-color: #4a5568;
+}
+.dark #examCreatorContainer input {
+  background-color: #4a5568;
+  border-color: #63b3ed;
+  color: #e2e8f0;
+}
+.dark .distractor-input {
+  border-color: #f56565 !important;
+}
+
+.dark .text-green-600 {
+  color: #9ae6b4;
+}
+
+.dark .text-red-700 {
+  color: #feb2b2;
+}
+
+.dark .text-blue-700 {
+  color: #90cdf4;
+}
+
+.dark .question-box {
+  background-color: #2d3748;
+  border-color: #4a5568;
+}
+
+.dark .edit-btn {
+  background-color: #3182ce;
+  color: #ffffff;
+}
+
+.dark .delete-btn {
+  background-color: #e53e3e;
+  color: #ffffff;
+}

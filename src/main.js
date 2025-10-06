@@ -1,5 +1,9 @@
 import { initializeTheme } from "./core/themeManager.js";
-import { processExcelFile, downloadTemplate } from "./core/excelProcessor.js";
+import {
+  processExcelFile,
+  downloadTemplate,
+  exportQuestionsToExcel,
+} from "./core/excelProcessor.js";
 import {
   setQuizData,
   generateQuizUI,
@@ -8,6 +12,11 @@ import {
   reloadQuiz,
   clearAnswers,
 } from "./ui/QuizRenderer.js";
+import {
+  initializeQuestionManager,
+  getQuestions,
+  resetForm,
+} from "./ui/QuestionManager.js";
 
 const excelFileInput = document.getElementById("excelFile");
 const downloadTemplateButton = document.getElementById(
@@ -19,6 +28,32 @@ const reloadQuizButton = document.getElementById("reloadQuizButton");
 const clearAnswersButton = document.getElementById("clearAnswersButton");
 const messageElement = document.getElementById("message");
 const quizContainer = document.getElementById("quizContainer");
+
+const newExamButton = document.getElementById("newExamButton");
+const uploadExamButton = document.getElementById("uploadExamButton");
+const examCreatorContainer = document.getElementById("examCreatorContainer");
+const excelUploaderContainer = document.getElementById(
+  "excelUploaderContainer"
+);
+const exportExamButton = document.getElementById("exportExamButton");
+
+function toggleView(view) {
+  excelUploaderContainer.classList.add("hidden");
+  examCreatorContainer.classList.add("hidden");
+  quizContainer.classList.add("hidden");
+
+  messageElement.classList.add("hidden");
+  document.getElementById("resultsContainer").classList.add("hidden");
+  setQuizData([]);
+  document.getElementById("quizForm").innerHTML = "";
+
+  if (view === "upload") {
+    excelUploaderContainer.classList.remove("hidden");
+  } else if (view === "create") {
+    examCreatorContainer.classList.remove("hidden");
+    resetForm();
+  }
+}
 
 async function handleFileChange(event) {
   messageElement.classList.add("hidden");
@@ -33,6 +68,7 @@ async function handleFileChange(event) {
     const questions = await processExcelFile(file);
     setQuizData(questions);
     generateQuizUI(questions);
+    quizContainer.classList.remove("hidden");
     messageElement.textContent = `Éxito: Se cargaron ${questions.length} preguntas.`;
     messageElement.classList.remove("text-red-600");
     messageElement.classList.add("text-green-600");
@@ -47,8 +83,20 @@ async function handleFileChange(event) {
   }
 }
 
+function handleExportExam() {
+  const questions = getQuestions();
+  if (questions.length === 0) {
+    alert("Agrega al menos una pregunta para exportar.");
+    return;
+  }
+  exportQuestionsToExcel(questions);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initializeTheme();
+
+  initializeQuestionManager(document.getElementById("questionsList"));
+  toggleView("upload");
 
   excelFileInput.addEventListener("change", handleFileChange);
   downloadTemplateButton.addEventListener("click", downloadTemplate);
@@ -56,4 +104,8 @@ document.addEventListener("DOMContentLoaded", () => {
   restartQuizButton.addEventListener("click", restartQuiz);
   reloadQuizButton.addEventListener("click", reloadQuiz);
   clearAnswersButton.addEventListener("click", clearAnswers);
+
+  newExamButton.addEventListener("click", () => toggleView("create"));
+  uploadExamButton.addEventListener("click", () => toggleView("upload"));
+  exportExamButton.addEventListener("click", handleExportExam);
 });

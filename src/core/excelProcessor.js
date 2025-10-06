@@ -54,6 +54,11 @@ export async function processExcelFile(file) {
 }
 
 export function downloadTemplate() {
+  if (typeof XLSX === "undefined") {
+    alert("La librería XLSX no está cargada. Verifica el CDN.");
+    return;
+  }
+
   const ws_data = [
     [
       "Pregunta",
@@ -86,4 +91,52 @@ export function downloadTemplate() {
 
   XLSX.utils.book_append_sheet(wb, ws, "Preguntas");
   XLSX.writeFile(wb, "Formato_Examen_Plantilla.xlsx");
+}
+
+export function exportQuestionsToExcel(questions) {
+  if (typeof XLSX === "undefined") {
+    alert("La librería XLSX no está cargada. Verifica el CDN.");
+    return;
+  }
+
+  const MAX_DISTRACTORS_EXPORT = 6;
+  const header = [
+    "Pregunta",
+    "Respuesta Correcta",
+    ...Array.from(
+      { length: MAX_DISTRACTORS_EXPORT },
+      (_, i) => `Distractor ${i + 1}`
+    ),
+  ];
+
+  const data = questions.map((q) => {
+    const row = [q.question, q.correctAnswer];
+
+    const distractors = q.options.filter((opt) => opt !== q.correctAnswer);
+
+    for (let i = 0; i < MAX_DISTRACTORS_EXPORT; i++) {
+      row.push(distractors[i] || "");
+    }
+
+    return row;
+  });
+
+  const ws_data = [header, ...data];
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+  ws["!cols"] = [
+    { wch: 40 },
+    { wch: 25 },
+    { wch: 20 },
+    { wch: 20 },
+    { wch: 20 },
+    { wch: 20 },
+    { wch: 20 },
+    { wch: 20 },
+  ];
+
+  XLSX.utils.book_append_sheet(wb, ws, "Examen Creado");
+  XLSX.writeFile(wb, "Examen_Personalizado.xlsx");
 }
