@@ -4,6 +4,9 @@
 
 Una aplicación web de una sola página (SPA) que permite a los usuarios **cargar un archivo Excel (.xlsx)** y transformarlo instantáneamente en un **examen interactivo** con opciones de respuesta mezcladas y corrección automática. Diseñado con una arquitectura modular y enfocado en la usabilidad y la compatibilidad con diferentes temas (Claro/Oscuro).
 
+Puedes probarla desde este sitio
+https://generador-de-examenes.onrender.com/
+
 ---
 
 ## 🌟 Características
