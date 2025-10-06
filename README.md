@@ -1,4 +1,4 @@
-# Generador de Exámenes desde Excel
+# Gestor de Exámenes desde Excel
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -8,6 +8,9 @@ Una aplicación web de una sola página (SPA) que permite a los usuarios **carga
 
 ## 🌟 Características
 
+* **Doble Modalidad de Uso:** Alterna entre **Cargar** un examen desde un archivo Excel o **Crear** un examen desde cero en la aplicación.
+* **Creación de Exámenes (CRUD):** Módulo completo para **agregar, editar y eliminar preguntas** directamente en la interfaz.
+* **Exportación a Excel 💾:** Convierte las preguntas creadas manualmente en la aplicación de vuelta a un archivo `.xlsx`, permitiendo **personalizar el nombre del archivo**.
 * **Carga de Archivos:** Procesa archivos `.xlsx` usando la librería `SheetJS/js-xlsx`.
 * **Generación Dinámica:** Convierte filas de Excel en preguntas con opciones de respuesta aleatorias.
 * **Corrección Automática:** Evalúa las respuestas del usuario y muestra la puntuación y las respuestas correctas/incorrectas.
@@ -32,13 +35,15 @@ Este proyecto fue desarrollado utilizando las siguientes tecnologías y librerí
 
 Este proyecto está diseñado para funcionar de forma completamente local y no requiere de ningún servidor web ni instalación de dependencias (Node.js, etc.).
 
-1.  **Clonar el Repositorio:**
-    ```bash
-    git clone https://github.com/irvaguileradev7/Generador-de-examenes.git
-    cd generador-de-examenes
-    ```
-2.  **Ejecutar:** Simplemente abre el archivo **`index.html`** en cualquier navegador moderno.
-3.  **Cargar Examen:** Utiliza el botón **"Descargar plantilla de Excel"** para conocer el formato requerido (Columna A: Pregunta, Columna B: Respuesta Correcta, C en adelante: Distractores). Luego, sube tu archivo con el botón **"Seleccionar Archivo Excel"**.
+1.  **Clonar el Repositorio:**
+    ```bash
+    git clone [https://github.com/irvaguileradev7/Generador-de-examenes.git](https://github.com/irvaguileradev7/Generador-de-examenes.git)
+    cd generador-de-examenes
+    ```
+2.  **Ejecutar:** Simplemente abre el archivo **`index.html`** en cualquier navegador moderno.
+3.  **Cargar o Crear:**
+    * **Cargar:** Utiliza el botón **"Descargar plantilla de Excel"** para conocer el formato requerido (Columna A: Pregunta, Columna B: Respuesta Correcta, C en adelante: Distractores). Luego, sube tu archivo.
+    * **Crear:** Presiona **"Crear Nuevo Examen ➕"** para acceder al gestor de preguntas, añadir tus preguntas y, finalmente, **exportarlas a un archivo Excel** para usarlas o compartirlas.
 
 ---
 
@@ -46,20 +51,21 @@ Este proyecto está diseñado para funcionar de forma completamente local y no r
 
 La aplicación sigue una arquitectura modular para mejorar la organización del código:
 /generador-examenes/
-├── index.html             # Punto de entrada principal (la aplicación web)
-├── LICENSE                # Archivo de licencia (actualmente MIT)
-├── README.md              # Documentación principal del proyecto (este archivo)
-└── src/                   # Contiene todo el código fuente de la aplicación
-    ├── core/              # Lógica central del negocio (independiente de la UI)
-    │   ├── excelProcessor.js  # Carga y parseo de datos desde archivos Excel.
-    │   ├── themeManager.js    # Manejo del modo Claro/Oscuro y persistencia de la preferencia.
-    │   └── utils.js           # Colección de funciones auxiliares (ej. shuffleArray).
-    ├── ui/                    # Componentes y lógica de la Interfaz de Usuario (UI)
-    │   ├── QuizRenderer.js    # Lógica de renderizado del examen, manejo de respuestas y corrección.
-    │   └── TopBar.js          # Manejo de la barra de navegación superior (eventos, interacciones).
-    ├── styles/                # Hojas de estilo
-    │   └── styles.css         # Estilos personalizados de la aplicación y reglas de Dark Mode.
-    └── main.js                # Coordinador principal: Inicializa los módulos de /core/, /ui/ y configura los listeners.
+├── index.html             # Punto de entrada principal (la aplicación web)
+├── LICENSE                # Archivo de licencia (actualmente MIT)
+├── README.md              # Documentación principal del proyecto (este archivo)
+└── src/                   # Contiene todo el código fuente de la aplicación
+    ├── core/              # Lógica central del negocio (independiente de la UI)
+    │   ├── excelProcessor.js  # Carga, parseo y **Exportación de datos a Excel**.
+    │   ├── themeManager.js    # Manejo del modo Claro/Oscuro y persistencia de la preferencia.
+    │   └── utils.js           # Colección de funciones auxiliares (ej. shuffleArray).
+    ├── ui/                    # Componentes y lógica de la Interfaz de Usuario (UI)
+    │   ├── QuizRenderer.js    # Lógica de renderizado del examen, manejo de respuestas y corrección.
+    │   ├── QuestionManager.js # **NUEVO:** Lógica para la creación, edición y eliminación (CRUD) de preguntas.
+    │   └── TopBar.js          # Manejo de la barra de navegación superior (eventos, interacciones).
+    ├── styles/                # Hojas de estilo
+    │   └── styles.css         # Estilos personalizados de la aplicación y reglas de Dark Mode.
+    └── main.js                # Coordinador principal: Inicializa los módulos de /core/, /ui/ y configura los listeners.
 
 ---
 
